@@ -13,7 +13,8 @@ PASSWORD = "123"
 super_user = User.create(
     name: "Admin",
     email: "admin@user.com",
-    password: PASSWORD
+    password: PASSWORD,
+    is_admin: true
 )
 
 5.times do
@@ -54,6 +55,6 @@ auctions = Auction.all
 bids = Bid.all
 
 
-puts "generated #{auctions.count} many auctions"
-puts "generated #{bids.count} many bids"
-puts "generated #{users.count} many users"
+puts "generated #{auctions.count} auctions"
+puts "generated #{bids.count} bids"
+puts "generated #{users.count} users"

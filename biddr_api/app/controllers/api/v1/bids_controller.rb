@@ -1,4 +1,5 @@
 class Api::V1::BidsController < Api::ApplicationController
+    before_action :authenticate_user!
 
     def create
         bid = Bid.new params.require(:bid).permit(:bid_price, :auction_id)
