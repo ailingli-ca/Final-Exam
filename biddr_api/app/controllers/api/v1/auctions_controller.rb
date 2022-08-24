@@ -1,6 +1,6 @@
 class Api::V1::AuctionsController < Api::ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
-    
+
     def index
         auctions = Auction.order(created_at: :desc)
         render(json: auctions, each_serializer: AuctionCollectionSerializer)
@@ -8,12 +8,13 @@ class Api::V1::AuctionsController < Api::ApplicationController
 
     def show
         auction = Auction.find(params[:id])
+        bids = auction.bids.order(bid_price: :desc)
         render(json: auction)
     end
 
     def create
         auction = Auction.new(auction_params)
-        auction.user = User.current_user
+        auction.user = current_user
         if auction.save
             render json:{id: auction.id}
         else
